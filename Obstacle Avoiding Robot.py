@@ -13,6 +13,7 @@ steer     = ctrl.Consequent(np.arange(-45, 46, 1), 'steer')           # độ, -
 distance['gần']   = fuzz.trapmf(distance.universe, [0, 0, 20, 80])
 distance['trung bình'] = fuzz.trimf(distance.universe, [50, 120, 190])
 distance['xa']    = fuzz.trapmf(distance.universe, [160, 240, 300, 300])
+
 # Hướng (hướng mục tiêu)
 direction['trái']   = fuzz.trapmf(direction.universe, [-90, -90, -60, -10])
 direction['trung tâm'] = fuzz.trimf(direction.universe,  [-20, 0, 20])
@@ -69,4 +70,4 @@ if __name__ == "__main__":
     tests = [(25, 0), (25, -40), (120, 0), (200, 0)]
     for d, a in tests:
         v, s = avoid_obstacle(d, a)
-        print(f"Khoảng cách={d:>3} cm, Hướng mục tiêu={a:>4}° -> Tốc độ={v:5.1f}% , Lái={s:6.2f}°")\
+        print(f"Khoảng cách={d:>3} cm, Hướng mục tiêu={a:>4}° -> Tốc độ={v:5.1f}% , Lái={s:6.2f}°")
