@@ -64,8 +64,12 @@ sys.input['direction'] = int(input("Hướng của vật (Từ -90 độ -> 90 �
 
 sys.compute()
 
-print(sys.output['speed'])
-print(sys.output['steer'])
+
+sys.output['speed']
+sys.output['steer']
+
+print(f"Tốc độ: {sys.output['speed']}km/h")
+print(f"Tốc độ: {sys.output['steer']} độ")
 
 speed.view(sim=sys)
 steer.view(sim=sys)
