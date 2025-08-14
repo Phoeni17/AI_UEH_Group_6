@@ -52,3 +52,21 @@ r9 = ctrl.Rule(direction['phải'] & distance['xa'],    steer['đi thẳng'])
 # Xây dựng hệ thống
 control_system = ctrl.ControlSystem([r_s1, r_s2, r_s3, r1, r2, r3, r4, r5, r6, r7, r8, r9])
 sim = ctrl.ControlSystemSimulation(control_system)
+
+def avoid_obstacle(distance_cm: float, target_dir_deg: float):
+    """
+    distance_cm: 0..200 (cm)
+    target_dir_deg: -90..+90 (Âm = trái, dương = phải, 0 = giữa)
+    return: (speed_percent, steering_deg)
+    """
+    sim.input['distance'] = float(np.clip(distance_cm, 0, 200))
+    sim.input['direction'] = float(np.clip(target_dir_deg, -90, 90))
+    sim.compute()
+    return sim.output['speed'], sim.output['steer']
+
+# ===== Ví dụ =====
+if __name__ == "__main__":
+    tests = [(25, 0), (25, -40), (120, 0), (200, 0)]
+    for d, a in tests:
+        v, s = avoid_obstacle(d, a)
+        print(f"Khoảng cách={d:>3} cm, Hướng mục tiêu={a:>4}° -> Tốc độ={v:5.1f}% , Lái={s:6.2f}°")\
