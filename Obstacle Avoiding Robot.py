@@ -68,8 +68,8 @@ sys.compute()
 sys.output['speed']
 sys.output['steer']
 
-print(f"Tốc độ: {sys.output['speed']}km/h")
-print(f"Tốc độ: {sys.output['steer']} độ")
+print(f"Tốc độ: {sys.output['speed']:.3}km/h")
+print(f"Tốc độ: {sys.output['steer']:.2} độ")
 
 speed.view(sim=sys)
 steer.view(sim=sys)
