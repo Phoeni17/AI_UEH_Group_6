@@ -42,17 +42,17 @@ r_s2 = ctrl.Rule(distance['trung bình'], speed['trung bình'])
 r_s3 = ctrl.Rule(distance['xa'],    speed['nhanh'])
 
 # Lái theo hướng mục tiêu; cường độ thay đổi theo độ gần
-r1 = ctrl.Rule(direction['trái'] | distance['gần'],   steer['rẽ gắt phải'])
-r2 = ctrl.Rule(direction['trái'] | distance['trung bình'], steer['rẽ nhẹ phải'])
-r3 = ctrl.Rule(direction['trái'] | distance['xa'],    steer['đi thẳng'])
+r1 = ctrl.Rule(direction['trái'] & distance['gần'],   steer['rẽ gắt phải'])
+r2 = ctrl.Rule(direction['trái'] & distance['trung bình'], steer['rẽ nhẹ phải'])
+r3 = ctrl.Rule(direction['trái'] & distance['xa'],    steer['đi thẳng'])
 
-r4 = ctrl.Rule(direction['trung tâm'] | distance['xa'],    steer['đi thẳng'])
-r5 = ctrl.Rule(direction['trung tâm'] | distance['trung bình'], steer['rẽ nhẹ trái'])
-r6 = ctrl.Rule(direction['trung tâm'] | distance['gần'],   steer['rẽ gắt trái'])
+r4 = ctrl.Rule(direction['trung tâm'] & distance['xa'],    steer['đi thẳng'])
+r5 = ctrl.Rule(direction['trung tâm'] & distance['trung bình'], steer['rẽ nhẹ trái'])
+r6 = ctrl.Rule(direction['trung tâm'] & distance['gần'],   steer['rẽ gắt trái'])
 
-r7 = ctrl.Rule(direction['phải'] | distance['gần'],   steer['rẽ gắt trái'])
-r8 = ctrl.Rule(direction['phải'] | distance['trung bình'], steer['rẽ nhẹ trái'])
-r9 = ctrl.Rule(direction['phải'] | distance['xa'],    steer['đi thẳng'])
+r7 = ctrl.Rule(direction['phải'] & distance['gần'],   steer['rẽ gắt trái'])
+r8 = ctrl.Rule(direction['phải'] & distance['trung bình'], steer['rẽ nhẹ trái'])
+r9 = ctrl.Rule(direction['phải'] & distance['xa'],    steer['đi thẳng'])
 
 # Xây dựng hệ thống
 control_system = ctrl.ControlSystem([r_s1, r_s2, r_s3, r1, r2, r3, r4, r5, r6, r7, r8, r9])
@@ -69,7 +69,7 @@ sys.output['speed']
 sys.output['steer']
 
 print(f"Tốc độ: {sys.output['speed']:.3}km/h")
-print(f"Tốc độ: {sys.output['steer']:.2} độ")
+print(f"Góc quay: {sys.output['steer']:.3} độ")
 
 speed.view(sim=sys)
 steer.view(sim=sys)
